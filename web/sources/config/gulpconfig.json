@@ -1,0 +1,24 @@
+{
+  "src": "sources/",
+  "dest": "public/",
+  "css": {
+    "dest": "css"
+  },
+  "scss": {
+    "src": "scss/**/*.scss",
+    "dest": "css"
+  },
+  "js": {
+    "src": "js/**/*.js",
+    "dest": "js",
+    "temp": "js/temp"
+  },
+  "fonts": {
+    "src": "fonts/*",
+    "dest": "font"
+  },
+  "images": {
+    "src": "media/images/**",
+    "dest": "media/images"
+  }
+}
