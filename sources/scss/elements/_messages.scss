@@ -1,0 +1,20 @@
+.temp-message {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    color: $white;
+    opacity: 0;
+    transition: opacity 1s;
+
+    &--error {
+        background-color: $red;
+        opacity: 0.9;
+    }
+
+    &--notify {
+        background-color: $green;
+        opacity: 0.9;
+    }
+}

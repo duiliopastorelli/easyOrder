@@ -1,14 +1,66 @@
 <h1>{{title}}</h1>
 <p>Welcome to {{title}}</p>
-<div id="justOrder">${foo}</div>
+<div id="justOrder" v-if="loaded">
+    <p class="temp-message"
+       :class="{'temp-message--error': tempMessage.isError,
+       'temp-message--notify' : tempMessage.isNotify}"
+       v-if="tempMessage">${tempMessage.content}</p>
+    <a href="#"
+       class="btn btn--green"
+       @click.prevent="newOrderCollection"
+    >New order collection</a>
+</div>
 
 <script>
     let myApp = new Vue({
         delimiters: ['${', '}'],
         el: '#justOrder',
-        data:{
-            foo: 'foobar'
+        data: {
+            loaded: false,
+            tempMessage: {
+                content: false,
+                isError: false,
+                isNotify: false
+            },
+            tempMessageClass: ""
         },
-        methods:{}
+        methods: {
+            newOrderCollection() {
+                let data = {restaurantLink: 'example'};
+
+                fetch('/orderCollection', {
+                    method: 'POST',
+                    body: JSON.stringify(data),
+                    headers: new Headers({
+                        'Content-Type': 'application/json'
+                    })
+                })
+                        .then(res => res.json())
+                        .catch(error =>
+                                this.displayTempMessage(error, 'error'))
+                        .then(response =>
+                                this.displayTempMessage('Order created',
+                                        'notify'));
+            },
+            displayTempMessage(message, code) {
+                //Assign proper style
+                if (code === 'error') {
+                    this.tempMessage.isError = true;
+                } else {
+                    this.tempMessage.isNotify = true;
+                }
+                //Assign the content to display
+                this.tempMessage.content = message;
+                setTimeout(() => {
+                    //Reset the status
+                    this.tempMessage.content = false;
+                    this.tempMessage.isError = false;
+                    this.tempMessage.isNotify = false;
+                }, 2000)
+            }
+        },
+        mounted() {
+            this.loaded = true
+        }
     })
 </script>

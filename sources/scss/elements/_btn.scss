@@ -1,0 +1,15 @@
+.btn {
+    padding: 10px;
+    border-radius: 10px;
+    color: $white;
+
+    &,
+    &:hover,
+    &:active {
+        text-decoration: none;
+    }
+
+    &--green {
+        background-color: $green;
+    }
+}
