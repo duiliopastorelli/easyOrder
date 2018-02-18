@@ -4,13 +4,19 @@ const
     app = express(),
     morgan = require('morgan'),
     mongoose = require('mongoose'),
-    Test = require('./models/test');
+    OrderCollection = require('./models/orderCollection'),
+    orderRoutes = require('./routes/orderCollection'),
+    bodyParser = require('body-parser');
 
 
 mongoose.connect('mongodb://just-order-mongo/api');
 
 //Enable request logging on console
 app.use(morgan('dev'));
+
+//Enable the body parser
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 //Adjust header for CORS errors
 //The 2nd parameter can be used to restrict the allowance to a specific domain
@@ -37,24 +43,20 @@ app.use('/', router.get('/', (req, res, next) => {
     })
 }));
 
-router.post('/', (req, res, next) => {
-    const test = new Test({
-        _id: mongoose.Types.ObjectId(),
-        name: req.body.name,
-        price: req.body.price
-    });
-    test
-        .save()
-        .then(result => {
-            res.status(201).json({result});
-        })
-        .catch(err => {
-            res.status(500).json({error: err});
-        });
-});
+app.use('/orderCollection', orderRoutes);
+
+
+
+
+
+
+
+
+
+
 
 router.get('/db', (req, res, next) => {
-    Test
+    OrderCollection
         .find()
         .exec()
         .then(response => {
