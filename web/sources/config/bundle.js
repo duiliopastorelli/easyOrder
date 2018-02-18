@@ -25,11 +25,17 @@ let options = {
 
 module.exports = {
     bundle: {
-        "bundleManager": {
+        "vueDev": {
             scripts: [
-                './public/assets/js/temp/bundle-manager.js'
+                './public/js/temp/vue.js'
             ],
-            options: syncOptions
+            options: options
+        },
+        "vue": {
+            scripts: [
+                './public/js/temp/vue.min.js'
+            ],
+            options: options
         }
     }
 };

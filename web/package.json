@@ -1,12 +1,13 @@
 {
-  "name": "Just Order - web interface",
+  "name": "just-order-web-interface",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon --delay 2 ./bin/www"
+    "start": "NODE_ENV=develop nodemon --delay 2 ./bin/www"
   },
   "dependencies": {
     "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "body-parser": "~1.17.1",
     "browser-sync": "^2.23.6",
     "chai": "^4.1.2",

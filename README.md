@@ -17,11 +17,15 @@ npm install
 cd ../api
 npm install
 
-cd ..
-docker-compose up
-
 cd web
 gulp dev
+```
+
+Change the variable NODE_ENV to develop in package.json
+
+```
+cd ..
+docker-compose up
 ```
 
 ##Front End
@@ -34,7 +38,7 @@ The "api" server is responsible for provide REST api endpoint.
 
 It's reachable at localhost:3001
 
-###End points
+###Api end points
 
 GET     /   => Provides a sample answer
 POST    / {name:String, price:Number}   => Persist data

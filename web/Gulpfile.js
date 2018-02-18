@@ -130,6 +130,9 @@ gulp.task('sass:devWithClean', ['css:clean'], function () {
         .pipe(browserSync.stream())
 });
 
+/**
+ * JS
+ */
 gulp.task('js', ['bundle'], function () {
     return del([
         path.dest + path.js.temp
@@ -142,6 +145,9 @@ gulp.task('js:dev', ['bundle:dev'], function () {
     ]);
 });
 
+/**
+ * BUNDLES
+ */
 gulp.task('bundle', ['jsCompile'], function() {
 
     // Set the environment for uglify the files
@@ -182,7 +188,7 @@ gulp.task('bundle:dev', ['jsCompile'], function() {
 gulp.task('jsCompile', ['js:clean'], () => {
     return gulp.src([path.src + path.js.src])
         .pipe(babel({
-            presets: ['env'],
+            presets: ['env']
             // ignore: ['sources/js/vendors/lazyload.js']
         }))
         .pipe(gulp.dest(path.dest + path.js.temp));
