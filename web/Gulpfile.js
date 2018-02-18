@@ -188,8 +188,8 @@ gulp.task('bundle:dev', ['jsCompile'], function() {
 gulp.task('jsCompile', ['js:clean'], () => {
     return gulp.src([path.src + path.js.src])
         .pipe(babel({
-            presets: ['env']
-            // ignore: ['sources/js/vendors/lazyload.js']
+            presets: ['env'],
+            ignore: ['sources/js/vue.js','sources/js/vue.min.js']
         }))
         .pipe(gulp.dest(path.dest + path.js.temp));
 });

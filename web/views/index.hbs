@@ -1,3 +1,14 @@
+<div id="justOrder">${foo}</div>
+
+<script>
+    let myApp = new Vue({
+        delimiters: ['${', '}'],
+        el: '#justOrder',
+        data:{
+            foo: 'foobar'
+        },
+        methods:{}
+    })
+</script>
 <h1>{{title}}</h1>
 <p>Welcome to {{title}}</p>
-<p>env is: {{{process}}}!</p>

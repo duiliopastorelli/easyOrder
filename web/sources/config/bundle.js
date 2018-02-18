@@ -29,13 +29,13 @@ module.exports = {
             scripts: [
                 './public/js/temp/vue.js'
             ],
-            options: options
+            options: syncOptions
         },
         "vue": {
             scripts: [
                 './public/js/temp/vue.min.js'
             ],
-            options: options
+            options: syncOptions
         }
     }
 };
