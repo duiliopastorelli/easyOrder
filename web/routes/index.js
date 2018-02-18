@@ -16,7 +16,7 @@ router.get('/', function (req, res, next) {
     }
 
     res.render('index', {
-        title: 'Express',
+        title: 'Just Order',
         process: process.env.NODE_ENV,
         scriptVue: scriptsToLoad.vue
     });
