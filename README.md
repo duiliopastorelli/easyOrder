@@ -19,6 +19,9 @@ npm install
 
 cd ..
 docker-compose up
+
+cd web
+gulp dev
 ```
 
 ##Front End

@@ -1,5 +1,5 @@
 {
-  "name": "api",
+  "name": "Just Order - api",
   "version": "0.0.0",
   "description": "REST api for Just Order app",
   "main": "index.js",
