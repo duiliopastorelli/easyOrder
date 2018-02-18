@@ -2,16 +2,16 @@ version: '3'
 
 services:
 
-  just-order-api:
-    build: ./api
-    ports:
-      - 3001:3001
-    volumes:
-      - ./api:/opt/app
-    networks:
-      - justordernet
-    depends_on:
-      - just-order-mongo
+#  just-order-api:
+#    build: ./api
+#    ports:
+#      - 3001:3001
+#    volumes:
+#      - ./api:/opt/app
+#    networks:
+#      - justordernet
+#    depends_on:
+#      - just-order-mongo
 
   just-order-mongo:
     image: mongo
@@ -21,13 +21,15 @@ services:
       - justordernet
 
   just-order-web:
-      build: ./web
+      build: .
       ports:
         - 3000:3000
       volumes:
-        - ./web:/opt/app
+        - .:/opt/app
       networks:
         - justordernet
+      depends_on:
+        - just-order-mongo
 
 networks:
   justordernet:

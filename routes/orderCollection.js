@@ -30,12 +30,8 @@ router.post('/', (req, res, next) => {
 });
 
 
-
-
-
-
 router.get('/', (req, res, next) => {
-    Order
+    OrderCollection
         .find()
         .exec()
         .then(response => {
