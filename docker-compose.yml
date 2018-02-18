@@ -19,6 +19,10 @@ services:
       - ./data:/data/db
     networks:
       - justordernet
+    deploy:
+      restart_policy:
+        condition: unless-stopped
+        delay: 5s
 
   just-order-web:
       build: .

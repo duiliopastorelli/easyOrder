@@ -29,7 +29,6 @@ router.post('/', (req, res, next) => {
         });
 });
 
-
 router.get('/', (req, res, next) => {
     OrderCollection
         .find()
@@ -42,22 +41,31 @@ router.get('/', (req, res, next) => {
         });
 });
 
-router.get('/:orderId', (req, res, next) => {
-    const id = req.params.orderId;
+router.delete('/:orderCollectionId', (req, res, next) => {
+    const id = req.params.orderCollectionId;
 
-    res.status(200).json({
-        message: 'Orders detail',
-        id: id
-    })
-});
-
-router.delete('/:orderId', (req, res, next) => {
-    const id = req.params.orderId;
-
-    res.status(200).json({
-        message: 'Orders deleted',
-        id: id
-    })
+    // console.log(OrderCollection.findOne({_id: id}));
+    OrderCollection
+        .findOne({_id: id})
+        .remove()
+        .exec()
+        .then(response => {
+            console.log(response.n);
+            if(response.n !== 0){
+                res.status(200).json({
+                    message: 'Resource deleted',
+                    id: id
+                })
+            } else {
+                res.status(200).json({
+                    message: 'Resource not found',
+                    id: id
+                })
+            }
+        })
+        .catch(err => {
+            res.status(500).json({error: err});
+        });
 });
 
 module.exports = router;

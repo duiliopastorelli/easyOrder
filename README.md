@@ -1,45 +1,34 @@
 # easyOrder
 Order management app
 
-This app is made by 3 integrated Docker Containers:
-- the "web" front-end, responsible of handling the View and Controller
-- the "api" back-end, responsible for the Model
+This app is made by 2 integrated Docker Containers:
+- the "app"
 - the MongoDB database
 
 ##Develop
-
 For setting up the environment and launch the app:
 
 ```
-cd web
 npm install
-
-cd ../api
-npm install
-
-cd web
 gulp dev
 ```
 
 Change the variable NODE_ENV to develop in package.json
 
 ```
-cd ..
 docker-compose up
 ```
 
-##Front End
-The "web" server is responsible for the front-end side of the application, in particular for handle view and controller.
-
+##The app
 It's reachable at localhost:3000
 
-##Api
-The "api" server is responsible for provide REST api endpoint.
+##Api end points
+###/
+GET     /   => UI
 
-It's reachable at localhost:3001
+###/orderCollection
+POST    / {restaurantLink:String}   => Generate a new order collection
 
-###Api end points
+GET /   => get all order collections (temporary for dev purpose only)
 
-GET     /   => Provides a sample answer
-POST    / {name:String, price:Number}   => Persist data
-GET     /db => find all persisted data
+DELETE /id  => delete an order collection
