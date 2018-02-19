@@ -17,8 +17,8 @@
 
     <template v-if="status === 'orderMan'">
         <h2>Order: ${orderCollectionData._id}</h2>
-        <label for="restaurantLink">Restaurant link</label>
-        <input id="restaurantLink" type="text" v-model="orderCollectionData.restaurantLink" autofocus>
+        <label for="menuLink">Menu link</label>
+        <input id="menuLink" type="text" v-model="orderCollectionData.menuLink" autofocus>
         <a href="#"
            @click.prevent="amendOrderCollection">Amend order</a>
     </template>
@@ -41,7 +41,7 @@
         },
         methods: {
             newOrderCollection() {
-                let data = {restaurantLink: 'example'};
+                let data = {menuLink: 'example'};
 
                 fetch('/orderCollection', {
                     method: 'POST',
@@ -72,7 +72,6 @@
                         .catch(error =>
                                 this.displayTempMessage(error, 'error'))
                         .then(() => {
-                            this.status = 'orderMan';
                             this.displayTempMessage("Order amended",
                                     'notify')
                         });

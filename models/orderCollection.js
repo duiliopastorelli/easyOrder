@@ -14,7 +14,7 @@ const
         orders: {
             type: [mongoose.Schema.Types.ObjectId],
         },
-        restaurantLink: {
+        menuLink: {
             type: String,
             required: true
         }

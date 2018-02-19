@@ -17,7 +17,7 @@ router.post('/', (req, res, next) => {
             mongoose.Types.ObjectId(),
             mongoose.Types.ObjectId()
         ],
-        restaurantLink: req.body.restaurantLink
+        menuLink: req.body.menuLink
     });
     orderCollection
         .save()
@@ -32,21 +32,14 @@ router.post('/', (req, res, next) => {
 router.patch('/:orderCollectionId', (req, res, next) => {
     const id = req.params.orderCollectionId;
     let updateOps = {};
-    console.log(req.body);
-    // for (const ops of req.body) {
-    //     console.log(ops);
-    //     updateOps[ops.propName] = ops.value;
-    // }
     OrderCollection.update(
         {_id: id},
         {$set: req.body})
         .exec()
         .then(result => {
-            console.log(result);
             res.status(201).json(result);
         })
         .catch(err => {
-            console.log(err);
             res.status(500).json({error: err});
         })
 });
@@ -66,7 +59,6 @@ router.get('/', (req, res, next) => {
 router.delete('/:orderCollectionId', (req, res, next) => {
     const id = req.params.orderCollectionId;
 
-    // console.log(OrderCollection.findOne({_id: id}));
     OrderCollection
         .findOne({_id: id})
         .remove()
