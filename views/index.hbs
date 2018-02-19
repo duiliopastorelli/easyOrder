@@ -17,6 +17,10 @@
 
     <template v-if="status === 'orderMan'">
         <h2>Order: ${orderCollectionData._id}</h2>
+        <label for="restaurantLink">Restaurant link</label>
+        <input id="restaurantLink" type="text" v-model="orderCollectionData.restaurantLink" autofocus>
+        <a href="#"
+           @click.prevent="amendOrderCollection">Amend order</a>
     </template>
 </div>
 
@@ -53,6 +57,23 @@
                             this.orderCollectionData = res.result;
                             this.status = 'orderMan';
                             this.displayTempMessage("Order created",
+                                    'notify')
+                        });
+            },
+            amendOrderCollection() {
+                let data = this.orderCollectionData;
+                fetch('/orderCollection/' + this.orderCollectionData._id, {
+                    method: 'PATCH',
+                    body: JSON.stringify(data),
+                    headers: new Headers({
+                        'Content-Type': 'application/json'
+                    })
+                })
+                        .catch(error =>
+                                this.displayTempMessage(error, 'error'))
+                        .then(() => {
+                            this.status = 'orderMan';
+                            this.displayTempMessage("Order amended",
                                     'notify')
                         });
             },

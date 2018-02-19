@@ -29,6 +29,28 @@ router.post('/', (req, res, next) => {
         });
 });
 
+router.patch('/:orderCollectionId', (req, res, next) => {
+    const id = req.params.orderCollectionId;
+    let updateOps = {};
+    console.log(req.body);
+    // for (const ops of req.body) {
+    //     console.log(ops);
+    //     updateOps[ops.propName] = ops.value;
+    // }
+    OrderCollection.update(
+        {_id: id},
+        {$set: req.body})
+        .exec()
+        .then(result => {
+            console.log(result);
+            res.status(201).json(result);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({error: err});
+        })
+});
+
 router.get('/', (req, res, next) => {
     OrderCollection
         .find()
@@ -51,7 +73,7 @@ router.delete('/:orderCollectionId', (req, res, next) => {
         .exec()
         .then(response => {
             console.log(response.n);
-            if(response.n !== 0){
+            if (response.n !== 0) {
                 res.status(200).json({
                     message: 'Resource deleted',
                     id: id
