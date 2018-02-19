@@ -1,14 +1,23 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
 <div id="justOrder" v-if="loaded">
+
     <p class="temp-message"
        :class="{'temp-message--error': tempMessage.isError,
        'temp-message--notify' : tempMessage.isNotify}"
        v-if="tempMessage">${tempMessage.content}</p>
-    <a href="#"
-       class="btn btn--green"
-       @click.prevent="newOrderCollection"
-    >New order collection</a>
+
+    <h1>{{title}}</h1>
+
+    <template v-if="status === 'init'">
+        <p>Welcome to {{title}}</p>
+        <a href="#"
+           class="btn btn--green"
+           @click.prevent="newOrderCollection"
+        >New order collection</a>
+    </template>
+
+    <template v-if="status === 'orderMan'">
+        <h2>Order: ${orderCollectionData._id}</h2>
+    </template>
 </div>
 
 <script>
@@ -17,6 +26,8 @@
         el: '#justOrder',
         data: {
             loaded: false,
+            status: 'init',
+            orderCollectionData: {},
             tempMessage: {
                 content: false,
                 isError: false,
@@ -35,12 +46,15 @@
                         'Content-Type': 'application/json'
                     })
                 })
-                        .then(res => res.json())
                         .catch(error =>
                                 this.displayTempMessage(error, 'error'))
-                        .then(response =>
-                                this.displayTempMessage('Order created',
-                                        'notify'));
+                        .then(res => this.orderCollectionData = res.json())
+                        .then(res => {
+                            this.orderCollectionData = res.result;
+                            this.status = 'orderMan';
+                            this.displayTempMessage("Order created",
+                                    'notify')
+                        });
             },
             displayTempMessage(message, code) {
                 //Assign proper style
