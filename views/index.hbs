@@ -18,9 +18,33 @@
     <template v-if="status === 'orderMan'">
         <h2>Order: ${orderCollectionData._id}</h2>
         <label for="menuLink">Menu link</label>
-        <input id="menuLink" type="text" v-model="orderCollectionData.menuLink" autofocus>
+        <input id="menuLink" type="text" v-model="orderCollectionData.menuLink"
+               autofocus>
         <a href="#"
-           @click.prevent="amendOrderCollection">Amend order</a>
+           @click.prevent="amendOrderCollection">Save</a>
+
+        <a href="#"
+            @click.prevent="addMemberBox = !addMemberBox">Toggle add member section</a>
+
+        <template v-if="addMemberBox">
+            <h2>Add members</h2>
+            <div class="add-member__container">
+                <div class="add-member__heading">
+                    <div>Name</div>
+                    <div>Email</div>
+                    <div>Actions</div>
+                </div>
+                <div class="add-member__row">
+                    <input type="text">
+                    <input type="email">
+                    <div class="add-member__actions">
+                        <a href="#" @click.prevent="">Save</a>
+                        <a href="#" @click.prevent="">Edit</a>
+                        <a href="#" @click.prevent="">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </template>
     </template>
 </div>
 
@@ -31,6 +55,7 @@
         data: {
             loaded: false,
             status: 'init',
+            addMemberBox: false,
             orderCollectionData: {},
             tempMessage: {
                 content: false,

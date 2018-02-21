@@ -1,0 +1,30 @@
+.add-member {
+
+    &__container {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        margin: auto;
+        max-width: 660px;
+    }
+
+    &__heading,
+    &__row {
+        display: flex;
+        flex: 1;
+
+        & div,
+        & input {
+            display: flex;
+            flex: 1;
+            margin: 5px 10px 5px 0;
+        }
+    }
+
+    &__actions {
+
+        & a {
+            margin: 0 5px 0 0;
+        }
+    }
+}
